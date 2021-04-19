@@ -34,6 +34,12 @@ let topMovies = [
   }
 ];
 
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.send('This is Peter\'s movie database');
+});
+
 app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
