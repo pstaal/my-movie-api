@@ -1,4 +1,6 @@
-const express = require('express');
+const express = require('express'),
+morgan = require('morgan');
+
 const app = express();
 
 let topMovies = [
@@ -35,6 +37,8 @@ let topMovies = [
 ];
 
 app.use(express.static('public'));
+app.use(morgan('common'));
+
 
 app.get('/', (req, res) => {
   res.send('This is Peter\'s movie database');
