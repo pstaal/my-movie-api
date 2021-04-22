@@ -92,6 +92,23 @@ app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
+app.get('/movies/:name', (req, res) => {
+  res.json(topMovies.find((movie) =>
+    { return movie.director === req.params.name}));
+});
+
+app.get('/movies/:genre', (req, res) => {
+  res.send('Successful GET request!');
+});
+
+app.get('/movies/:director', (req, res) => {
+  res.send('Successful GET request!');
+});
+
+app.post('/user', (req, res) => {
+  res.send('Successful POST request!');
+});
+
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
 });
