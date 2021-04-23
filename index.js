@@ -92,31 +92,44 @@ app.get('/', (req, res) => {
   res.send('This is Peter\'s movie database');
 });
 
+// Return a list of ALL movies to the user
 app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
+// Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
 app.get('/movies/:name', (req, res) => {
   res.json(topMovies.find((movie) =>
     { return movie.director === req.params.name}));
 });
 
-app.post('movies/:user/:name/favorites', (req, res) => {
-  res.send(`movie ${name} was added to favorites`);
+// Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
+app.post('user/:name/favorites', (req, res) => {
+  let newMovie = req.body;
+  if(!newMovie.favorite) {
+    const message = 'Missing "favorite" in request body';
+    res.status(400).send(message);
+  } else {
+    res.status(201).send(newMovie);
+  }
 });
 
-app.delete('movies/:user/:name/favorites', (req, res) => {
+// Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
+app.delete('user/:name/favorites', (req, res) => {
   res.send(`movie ${name} was removed to favorites`);
 });
 
+// Return data about a genre (description) by name/title (e.g., “Thriller”)
 app.get('/movies/:genre', (req, res) => {
   res.send('Successful GET request!');
 });
 
+//Return data about a director (bio, birth year, death year) by name
 app.get('/movies/:director', (req, res) => {
   res.send('Successful GET request!');
 });
 
+// Allow new users to register
 app.post('/user', (req, res) => {
   let newUser = req.body;
 
@@ -128,6 +141,16 @@ app.post('/user', (req, res) => {
     users.push(newUser);
     res.status(201).send(newUser);
   }
+});
+
+// Allow users to update their user info (username)
+app.put('/user/:name', (req, res) => {
+  res.send('Successful PUT request!');
+});
+
+// Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
+app.delete('/user/:name', (req, res) => {
+  res.send('Successful DELETE request!');
 });
 
 app.listen(8080, () => {
