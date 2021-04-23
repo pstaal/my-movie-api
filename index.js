@@ -1,5 +1,7 @@
 const express = require('express'),
-morgan = require('morgan');
+morgan = require('morgan'),
+uuid = require('uuid'),
+bodyParser = require('body-parser');
 
 const app = express();
 
@@ -76,6 +78,8 @@ let topMovies = [
   }
 ];
 
+const users = [];
+app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(morgan('common'));
 app.use((err, req, res, next) => {
@@ -97,6 +101,14 @@ app.get('/movies/:name', (req, res) => {
     { return movie.director === req.params.name}));
 });
 
+app.post('movies/:user/:name/favorites', (req, res) => {
+  res.send(`movie ${name} was added to favorites`);
+});
+
+app.delete('movies/:user/:name/favorites', (req, res) => {
+  res.send(`movie ${name} was removed to favorites`);
+});
+
 app.get('/movies/:genre', (req, res) => {
   res.send('Successful GET request!');
 });
@@ -106,7 +118,16 @@ app.get('/movies/:director', (req, res) => {
 });
 
 app.post('/user', (req, res) => {
-  res.send('Successful POST request!');
+  let newUser = req.body;
+
+  if(!newUser.name) {
+    const message = 'Missing "name" in request body';
+    res.status(400).send(message);
+  } else {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).send(newUser);
+  }
 });
 
 app.listen(8080, () => {

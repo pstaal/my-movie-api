@@ -102,14 +102,14 @@
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)</td>
-        <td class="px-4 py-3">/user/[name]/[favorites]</td>
+        <td class="px-4 py-3">/user/[name]/favorites</td>
         <td class="px-4 py-3">POST</td>
         <td class="px-4 py-3">A JSON object holding name, password and favorite <br /><code class=" text-xs bg-black text-white block rounded-lg">{ name: 'peter staal, <br /> password: 'my password', <br /> favorite: 'Casino' }</code> </td>
         <td class="px-4 py-3">A text message showing the movie that was added to favorites</td>
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)</td>
-        <td class="px-4 py-3">/user/[name]/[favorites]</td>
+        <td class="px-4 py-3">/user/[name]/favorites</td>
         <td class="px-4 py-3">DELETE</td>
         <td class="px-4 py-3">None</td>
         <td class="px-4 py-3">A text message showing the movie that was deleted</td>
