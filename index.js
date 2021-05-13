@@ -126,15 +126,24 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
   });
 });
 
+// Get all movies
+app.get('/movies', (req, res) => {
+  Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
 
 app.get('/', (req, res) => {
   res.send('This is Peter\'s movie database');
 });
 
-// Return a list of ALL movies to the user
-app.get('/movies', (req, res) => {
-  res.json(topMovies);
-});
+
 
 // Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
 app.get('/movies/:name', (req, res) => {
