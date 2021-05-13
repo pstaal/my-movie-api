@@ -33,11 +33,10 @@
         <td class="px-4 py-3">a JSON object holding all the movies <br /><code class="bg-black text-white block rounded-lg text-xs">
           [ <br />
           { <br />
-            title: 'Midsommar', <br />
-            description: 'A couple travels to Scandinavia to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.', <br />
-            genre: 'horror', <br />
-            director: 'Ari Aster', <br />
-            image_URL: 'https://m.media-amazon.com/images/M/MV5BMzQxNzQzOTQwM15BMl5BanBnXkFtZTgwMDQ2NTcwODM@._V1_.jpg' <br />
+            Title: 'Midsommar', <br />
+            Description: 'A couple travels to Scandinavia to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.', <br />
+            Genre: 'horror', <br />
+            Director: 'Ari Aster', <br />
           }, <br />
           { <br />
             ... <br />
@@ -47,76 +46,75 @@
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
-        <td class="px-4 py-3">/movies/[title]</td>
+        <td class="px-4 py-3">/movies/:Title</td>
         <td class="px-4 py-3">GET</td>
         <td class="px-4 py-3">none</td>
         <td class="px-4 py-3">a JSON object holding information about a particular movie <br /><code class="bg-black text-white block rounded-lg text-xs">
           { <br />
-            title: 'Midsommar', <br />
-            description: 'A couple travels to Scandinavia to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.', <br />
-            genre: 'horror', <br />
-            director: 'Ari Aster', <br />
-            image_URL: 'https://m.media-amazon.com/images/M/MV5BMzQxNzQzOTQwM15BMl5BanBnXkFtZTgwMDQ2NTcwODM@._V1_.jpg' <br />
+            Title: 'Midsommar', <br />
+            Description: 'A couple travels to Scandinavia to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.', <br />
+            Genre: 'horror', <br />
+            Director: 'Ari Aster', <br />
           } <br />
         </code></td>
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
-        <td class="px-4 py-3">/movies/[genre]</td>
+        <td class="px-4 py-3">/movies/genre/:Genre</td>
         <td class="px-4 py-3">GET</td>
         <td class="px-4 py-3">none</td>
         <td class="px-4 py-3">a JSON object holding all the movies of a particular genre<br /><code class="bg-black text-white block rounded-lg text-xs">
           { <br />
-            genre: 'horror', <br />
-            movies: ['Midsommar', 'Halloween', 'Friday the 13th'] <br />
+            Name: 'horror', <br />
+            Desciption: "Scary stuff" <br />
           } <br />
         </code></td>
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Return data about a director (bio, birth year, death year) by name</td>
-        <td class="px-4 py-3">/movies/[director]</td>
+        <td class="px-4 py-3">/movies/director/:Director</td>
         <td class="px-4 py-3">GET</td>
         <td class="px-4 py-3">none</td>
         <td class="px-4 py-3">a JSON object holding all the personal information of a director<br /><code class="bg-black text-white block rounded-lg text-xs">
           { <br />
-            name: 'Martin Scorsese', <br />
-            bio: 'born somwhere...', <br />
-            birth year: 1939, <br />
-            death year: null, <br />
+            Name: 'Martin Scorsese', <br />
+            Bio: 'born somewhere...', <br />
+            Birth: 1939, <br />
+            Death: null, <br />
           } <br />
         </code></td>
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Allow new users to register</td>
-        <td class="px-4 py-3">/user</td>
+        <td class="px-4 py-3">/users</td>
         <td class="px-4 py-3">POST</td>
-        <td class="px-4 py-3">a JSON object holding name and password <br /><code class=" text-xs bg-black text-white block rounded-lg">{ name: 'peter staal, <br /> password: 'my password' }</code></td>
+        <td class="px-4 py-3">a JSON object holding Username, Password, Email and Birthday<br /><code class=" text-xs bg-black text-white block rounded-lg">{ Username: 'peter staal, <br /> Password: 'my password' <br /> Email: 'peter@peter.com' <br/> Birthday: 'Date'}</code></td>
         <td class="px-4 py-3">A text message showing the confirmation of registration</td>
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Allow users to update their user info (username)</td>
-        <td class="px-4 py-3">/user/[name]</td>
+        <td class="px-4 py-3">/users/:Username</td>
         <td class="px-4 py-3">PUT</td>
-        <td class="px-4 py-3">A JSON object holding name, password and new name <br /><code class="text-xs bg-black text-white block rounded-lg">{ name: 'peter staal, <br /> password: 'my password', <br /> newName: 'petrus staal' }</code> </td>
+        <td class="px-4 py-3">a JSON object holding Username, Password, Email and Birthday<br /><code class=" text-xs bg-black text-white block rounded-lg">{ Username: 'peter staal, <br /> Password: 'my password' <br /> Email: 'peter@peter.com' <br/> Birthday: 'Date'}</code></td>
         <td class="px-4 py-3">A text message confirming the update was succesful</td>
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)</td>
-        <td class="px-4 py-3">/user/[name]/favorites</td>
+        <td class="px-4 py-3">/users/:Username/movies/:MovieID</td>
         <td class="px-4 py-3">POST</td>
         <td class="px-4 py-3">A JSON object holding name, password and favorite <br /><code class=" text-xs bg-black text-white block rounded-lg">{ name: 'peter staal, <br /> password: 'my password', <br /> favorite: 'Casino' }</code> </td>
         <td class="px-4 py-3">A text message showing the movie that was added to favorites</td>
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)</td>
-        <td class="px-4 py-3">/user/[name]/favorites</td>
+        <td class="px-4 py-3">/users/:Username/movies/:MovieID</td>
         <td class="px-4 py-3">DELETE</td>
         <td class="px-4 py-3">None</td>
         <td class="px-4 py-3">A text message showing the movie that was deleted</td>
       </tr>
       <tr class="bg-gray-100 border-b border-gray-200">
         <td class="px-4 py-3">Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)</td>
-        <td class="px-4 py-3">/user/[name]</td>
+        <td class="px-4 py-3">/users/:Username</td>
         <td class="px-4 py-3">DELETE</td>
         <td class="px-4 py-3">None</td>
         <td class="px-4 py-3">A text message showing the user that was removed</td>
