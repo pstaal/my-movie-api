@@ -149,6 +149,23 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
   });
 });
 
+
+// Delete a user by username
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+    .then((user) => {
+      if (!user) {
+        res.status(400).send(req.params.Username + ' was not found');
+      } else {
+        res.status(200).send(req.params.Username + ' was deleted.');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
 // Get all movies
 app.get('/movies', (req, res) => {
   Movies.find()
@@ -173,16 +190,11 @@ app.get('/movies/:Title', (req, res) => {
     });
 });
 
-
-// Delete a user by username
-app.delete('/users/:Username', (req, res) => {
-  Users.findOneAndRemove({ Username: req.params.Username })
-    .then((user) => {
-      if (!user) {
-        res.status(400).send(req.params.Username + ' was not found');
-      } else {
-        res.status(200).send(req.params.Username + ' was deleted.');
-      }
+// Return data about the description of a genre
+app.get('/movies/genre/:Genre', (req, res) => {
+  Movies.findOne({ Genre: req.params.Genre })
+    .then((movie) => {
+      res.json(movie.Genre.Description);
     })
     .catch((err) => {
       console.error(err);
@@ -190,30 +202,16 @@ app.delete('/users/:Username', (req, res) => {
     });
 });
 
-
-
-// Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
-app.get('/movies/:name', (req, res) => {
-  res.json(topMovies.find((movie) =>
-    { return movie.director === req.params.name}));
-});
-
-
-
-// Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get('/movies/:genre', (req, res) => {
-  res.send('Successful GET request!');
-});
-
 //Return data about a director (bio, birth year, death year) by name
-app.get('/movies/:director', (req, res) => {
-  res.send('Successful GET request!');
-});
-
-
-// Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-app.delete('/user/:name', (req, res) => {
-  res.send('Successful DELETE request!');
+app.get('/movies/director/:Director', (req, res) => {
+  Movies.findOne({ Director: req.params.Director })
+    .then((movie) => {
+      res.json(movie.Director);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 app.listen(8080, () => {
