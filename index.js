@@ -183,21 +183,7 @@ app.get('/movies/:name', (req, res) => {
     { return movie.director === req.params.name}));
 });
 
-// Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
-app.post('user/:name/favorites', (req, res) => {
-  let newMovie = req.body;
-  if(!newMovie.favorite) {
-    const message = 'Missing "favorite" in request body';
-    res.status(400).send(message);
-  } else {
-    res.status(201).send(newMovie);
-  }
-});
 
-// Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('user/:name/favorites', (req, res) => {
-  res.send(`movie ${name} was removed to favorites`);
-});
 
 // Return data about a genre (description) by name/title (e.g., “Thriller”)
 app.get('/movies/:genre', (req, res) => {
@@ -209,10 +195,6 @@ app.get('/movies/:director', (req, res) => {
   res.send('Successful GET request!');
 });
 
-// Allow users to update their user info (username)
-app.put('/user/:name', (req, res) => {
-  res.send('Successful PUT request!');
-});
 
 // Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
 app.delete('/user/:name', (req, res) => {
