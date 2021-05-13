@@ -16,9 +16,16 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(morgan('common'));
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+     console.error(err.stack);
+     res.status(500).send('Something broke!');
 });
+
+//Default response
+app.get('/', (req, res) => {
+  res.send('This is Peter\'s movie database');
+});
+
+
 
 //Add a user
 /* We’ll expect JSON in this format
@@ -154,6 +161,19 @@ app.get('/movies', (req, res) => {
     });
 });
 
+// Return data about a single movie by title
+app.get('/movies/:Title', (req, res) => {
+  Movies.findOne({ Title: req.params.Title })
+    .then((movie) => {
+      res.json(movie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+
 // Delete a user by username
 app.delete('/users/:Username', (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
@@ -168,11 +188,6 @@ app.delete('/users/:Username', (req, res) => {
       console.error(err);
       res.status(500).send('Error: ' + err);
     });
-});
-
-
-app.get('/', (req, res) => {
-  res.send('This is Peter\'s movie database');
 });
 
 
