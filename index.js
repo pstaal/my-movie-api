@@ -192,7 +192,8 @@ app.get('/movies/:Title', (req, res) => {
 
 // Return data about the description of a genre
 app.get('/movies/genre/:Genre', (req, res) => {
-  Movies.findOne({ Genre: req.params.Genre })
+  console.log(req.params, "------------------------------------")
+  Movies.findOne({ "Genre.Name": req.params.Genre })
     .then((movie) => {
       res.json(movie.Genre.Description);
     })
@@ -204,7 +205,7 @@ app.get('/movies/genre/:Genre', (req, res) => {
 
 //Return data about a director (bio, birth year, death year) by name
 app.get('/movies/director/:Director', (req, res) => {
-  Movies.findOne({ Director: req.params.Director })
+  Movies.findOne({ "Director.Name": req.params.Director })
     .then((movie) => {
       res.json(movie.Director);
     })
