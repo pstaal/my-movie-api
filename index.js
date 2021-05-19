@@ -4,6 +4,8 @@ uuid = require('uuid'),
 bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+const passport = require('passport');
+require('./passport');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -13,6 +15,7 @@ mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useU
 const app = express();
 
 app.use(bodyParser.json());
+let auth = require('./auth')(app);
 app.use(express.static('public'));
 app.use(morgan('common'));
 app.use((err, req, res, next) => {
